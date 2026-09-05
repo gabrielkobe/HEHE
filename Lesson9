@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SI SATANAS NOON, NGAYON AT BUKAS (Ika-9 na Bahagi)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+  /* Minimalist 5-Color Dark Palette */
+  --bg-main: #111317;          /* 1. Base Charcoal Background */
+  --bg-card: #1a1e24;          /* 2. Slate Container Background */
+  --text-main: #e2e8f0;        /* 3. Off-White Primary Text */
+  --accent-sage: #8fa89b;      /* 4. Muted Sage Green Highlight */
+  --accent-warm: #c39b7d;      /* 5. Soft Muted Ochre Sub-Highlight */
+
+  /* Structural UI Variables */
+  --text-muted: #94a3b8;
+  --border-subtle: #2d3540;
+  --table-header-bg: #222730;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Maximized Presentation Frame */
+.presentation-container {
+  width: 95vw;                  /* Expanded from 88vw to maximize width */
+  max-width: 1400px;            /* Higher threshold for wide screens */
+  height: 92vh;                 /* Expanded from 82vh to maximize height */
+  max-height: 850px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Maximized Inner Slide Layout */
+.slide {
+  display: none;
+  padding: 32px 48px;           /* Reduced padding to reclaim interior space */
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;  /* Left-aligned layout */
+  align-items: flex-start;
+  text-align: left;
+  overflow-y: auto;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding-bottom: 65px;         /* Compact space for bottom controls */
+}
+
+.slide.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* Centered Title & Ending Slides Only */
+.slide.title-slide, 
+.slide.thank-you-slide {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+h1, h2, h3, h4, .serif-font {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+}
+
+/* Typography Scale & Multi-Color Usage */
+.title-slide h1, .thank-you-slide h1 {
+  color: var(--text-main);
+  font-size: 2.6rem;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  line-height: 1.2;
+}
+
+.title-slide h2, .thank-you-slide h2 {
+  font-size: 1.3rem;
+  color: var(--accent-warm);     /* Color 5: Warm Ochre for Subtitles */
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.badge {
+  background: rgba(143, 168, 155, 0.08);
+  color: var(--accent-sage);     /* Color 4: Sage Green Badge */
+  padding: 6px 18px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid var(--accent-sage);
+  margin-bottom: 16px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.title-slide .org, .thank-you-slide .org {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* Slide Section Headers */
+h3.slide-title {
+  color: var(--text-main);
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  letter-spacing: 0.5px;
+  position: relative;
+  width: 100%;
+  text-align: left;
+}
+
+h3.slide-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--accent-sage);
+}
+
+p, li {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  width: 100%;
+  max-width: 100%;              /* Removed constraints to fill screen width */
+}
+
+ul {
+  list-style-type: square;
+  margin: 12px 0 12px 24px;
+  width: 100%;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+blockquote {
+  background: rgba(195, 155, 125, 0.05); /* Subtle warm background tint */
+  border-left: 3px solid var(--accent-warm); /* Accent Warm Ochre border */
+  padding: 16px 24px;
+  margin: 16px 0;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--text-main);
+  width: 100%;
+  border-radius: 0 4px 4px 0;
+  text-align: left;
+}
+
+blockquote strong {
+  font-style: normal;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  color: var(--accent-sage);     /* Sage accent for verse citations */
+  display: block;
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Maximized Grid Layout */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Auto-fill available width */
+  gap: 16px;
+  margin: 16px 0;
+  width: 100%;
+}
+
+.card-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 20px;
+  text-align: left;
+}
+
+.card-box h4 {
+  color: var(--accent-warm);     /* Ochre highlight for card titles */
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-box p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* Maximized Table Layout */
+.custom-table {
+  width: 100%;                   /* Stretch tables to full slide width */
+  border-collapse: collapse;
+  margin: 16px 0;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.custom-table th {
+  background: var(--table-header-bg);
+  color: var(--accent-sage);     /* Sage accent for table headers */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-subtle);
+  text-align: left;
+}
+
+.custom-table td {
+  padding: 14px 16px;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  font-size: 0.9rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.highlight-text {
+  color: var(--accent-warm);     /* Ochre text highlight inside tables */
+  font-weight: 600;
+}
+
+/* Quiz Container */
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.quiz-placeholder {
+  border: 1px dashed var(--border-subtle);
+  border-radius: 6px;
+  padding: 48px;
+  text-align: left;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.01);
+  width: 100%;
+}
+
+/* Compact Controls Bar */
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px;
+  z-index: 10;
+}
+
+.btn {
+  background: var(--accent-sage);
+  color: var(--bg-main);
+  border: none;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.btn:disabled {
+  background: var(--border-subtle);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.slide-counter {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+    </style>
+</head>
+<body>
+
+<div class="presentation-container">
+
+    <!-- SLIDE 1 -->
+    <div class="slide title-slide active">
+        <div class="badge">Gabay Sa Kabataan: BIBLE QUIZ Edition 2026</div><br>
+        <h1>SI SATANAS NOON, NGAYON AT BUKAS</h1>
+        <h2>Ika-9 na Bahagi: ANG KASALUKUYANG PANAHON NA GAGAWIN NI SATANAS</h2>
+        <p class="org">Iglesia ng Dios kay Kristo Hesus | Alpha Omega Bible Study 2026</p>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Mga Layunin ng Pag-aaral (Objectives)</h3><br><br><br><br>
+        <p>Sa pagtatapos ng pag-aaral na ito, ang mga kapatid ay inaasahang:</p>
+        <br>
+        <ul>
+            <li><strong>1. Maihahayag at Maipaliwanag:</strong> Ang kasalukuyang gawain ni Satanas ayon sa Biblia.</li>
+            <li><strong>2. Maiuugnay ang mga Babala:</strong> Ang mga babala ng apostol tungkol sa panlilinlang at kasamaan sa kasalukuyang panahon.</li>
+            <li><strong>3. Maunawaan ang Kalagayan ng Mundo:</strong> Ang kalagayan ng mundo sa espirituwal na perspektibo at ang mga hamon na kinakaharap ng Iglesia.</li>
+            <li><strong>4. Maipakita ang Katiyakan ng Tagumpay:</strong> Ang katiyakan ng tagumpay ng Iglesia at ng Panginoon laban sa lahat ng kapangyarihan ni Satanas.</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Panimula</h3><br><br><br><br>
+        <ul>
+            <li>Ang mundo ay patuloy na nasa isang espirituwal na labanan.</li>
+            <li>Ang Diyos, sa Kaniyang walang hanggang karunungan, ay nagtatalaga ng Kaniyang Iglesia bilang ilaw at haligi ng katotohanan sa gitna ng kadiliman.</li>
+            <li>Subalit, may kaaway tayong kilala mula sa simula: si Satanas, ang diyablo, na patuloy na kumikilos upang ligligin, iligaw, at sirain ang mga gawa ng Diyos.</li>
+            <li>Sa bahaging ito, tatalakayin natin ang mga paraan ng gawain ni Satanas sa kasalukuyang panahon, ang espirituwal na kalagayan ng mundo, at ang huling kapalaran ng diyablo ayon sa Biblia.</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Ang Gagawin ni Satanas sa Panahong Ito</h3><br><br><br><br>
+        <p>Sa kasalukuyang panahon, kumikilos si Satanas sa pamamagitan ng mga daya, kasamaan, at tuso na panlilinlang sa mga tao.</p>
+        <blockquote>
+            "Upang tayo'y huwag na maging mga bata, na dala-dala ng bawat hangin ng aral sa pamamagitan ng pandaraya ng tao sa pamamagitan ng kanilang tuso-tusong balak."
+            <strong>— Efeso 4:14 (Ang Biblia)</strong>
+        </blockquote>
+        <p>Ipinapakita rito na maraming tao sa mundo at maging sa Iglesia ay madaling maligaw kapag hindi matibay ang kanilang pananampalataya.</p>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Pagpapalaganap ng Maling Aral o Doktrina</h3><br><br><br><br>
+        <p>Isa sa pangunahing taktika ni Satanas ay ang pagpapalaganap ng maling aral upang iligaw ang mga tao mula sa katotohanan ng Diyos, gaya halimbawa ng mga sumusunod:</p>
+        <ul>
+            <li>Mga Guro </li>
+            <li>"Prosperity Gospel"</li>
+            <li>Pagpapalaganap ng ("Relative Truth") </li>
+        </ul>
+        <blockquote>
+            "Ngunit ang Espiritu ay malinaw na nagsasabi na sa mga huling araw ay lilisan ang ilan sa pananampalataya, na makikinig sa mga espiritu ng panlilinlang at sa mga aral ng mga demonyo."
+            <strong>— I Timoteo 4:1</strong>
+        </blockquote>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Pinalitan ang Kabanalan ng Kalikuan</h3><br><br><br><br>
+        <p>Bukod dito, pinapasok ni Satanas ang tukso sa buhay ng tao upang palitan ang kabanalan ng kalikuan, gaya ng halimbawa na makikita natin:</p>
+        <ul>
+            <li>Social media na nagtutulak ng inggit, pagmamalabis, at pornograpiya.</li>
+            <li>Pagpapalaganap ng kawalan ng respeto sa awtoridad, pamilya, at institusyon.</li>
+            <li>Pagsasabing ang kasamaan ay "normal" o katanggap-tanggap.</li>
+        </ul>
+        <blockquote>
+            "[2] Sapagka't ang mga tao'y magiging maibigin sa kanilang sarili, maibigin sa salapi, mayayabang, mga mapagmalaki, mapagtungayaw, masuwayin sa mga magulang, mga walang turing, mga walang kabanalan, [3] Walang katutubong pagibig, mga walang paglulubag, mga palabintangin, mga walang pagpipigil sa sarili, mga mabangis, hindi mga maibigin sa mabuti."
+            <strong>— II Timoteo 3:2-3</strong>
+        </blockquote>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Ang mga Huwad na Kabutihan</h3><br><br><br><br>
+        <p>Nagpapakita si Satanas ng kasamaan bilang kabutihan upang linlangin ang tao, gaya ng mga sumusunod na halimbawa:</p>
+        <ul>
+            <li>Fake charities o scams na nagpapakita ng mabuting layunin ngunit pera ang nakukuha.</li>
+            <li>Sekta o grupo na nag-aangkin ng espirituwal na layunin ngunit nagtuturo ng maling doktrina.</li>
+            <li>Influencers o media personalities na nagpo-promote ng moralidad o spirituality ngunit may hidden agenda.</li>
+        </ul>
+        <blockquote>
+            "At hindi kataka-taka: sapagka't si Satanas man ay nagpapakunwaring anghel ng kaliwanagan."
+            <strong>— II Corinto 11:14-15</strong>
+        </blockquote>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Sirain ang Pagkakaisa</h3><br><br><br><br>
+        <p>Bukod dito, layunin ni Satanas ang sirain ang pagkakaisa ng mga mananampalataya sa pamamagitan ng selos, away, at maling impormasyon at ang naging bunga ay ang mga sumusunod:</p>
+        <ul>
+            <li>Paghahati sa simbahan o grupo dahil sa maliit na hindi pagkakaunawaan.</li>
+            <li>Paninirang-puri o tsismis laban sa lider o kapatid sa pananampalataya.</li>
+            <li>Pagkakaroon ng faction sa isang Bible study o ministry dahil sa personal na ambisyon.</li>
+        </ul>
+        <blockquote>
+            "Sapagka't nalalaman ko, na pagkatapos ko ay aalis, magkakaroon ng mga ganid na lobo sa inyo, na hindi magpapatawad sa kawan."
+            <strong>— Gawa 20:29</strong>
+        </blockquote>
+    </div>
+
+    <!-- SLIDE 9 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Pagpapalakas ng Materialismo at Kasakiman</h3><br><br><br><br>
+        <p>Nilalagay ni Satanas ang puso ng tao sa mga bagay na pansamantala at materyal, upang makalimot sa espirituwal na kayamanan, gaya ng:</p>
+        <ul>
+            <li>Pagsusumikap para sa kayamanan at karangyaan nang hindi isinasaalang-alang ang kalooban ng Diyos.</li>
+            <li>Gambling, speculative investments na nag-uudyok ng labis na kasakiman.</li>
+            <li>Social media obsession para sa status, likes, at followers kaysa sa moralidad at pananampalataya.</li>
+        </ul>
+        <blockquote>
+            "Huwag kayong mag-ipon para sa inyong sarili ng mga kayamanang nasa lupa... kundi mag-ipon kayo ng kayamanang nasa langit."
+            <strong>— Mateo 6:19-21</strong>
+        </blockquote>
+    </div>
+
+    <!-- SLIDE 10 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Paglulubog ng Isip at Damdamin sa Takot at Pag-aalala</h3><br><br><br><br>
+        <p>Ginagamit ni Satanas ang takot (Fear) at pag-aalala (Anxiety) upang pigilan ang pananampalataya at aksyon ng mga mananampalataya, gaya ng mga sumusunod na halimbawa:</p>
+        <ul>
+            <li>Fear-mongering sa politika o kaligtasan sa lipunan, na nagiging dahilan ng kawalan ng pananampalataya sa Diyos.</li>
+            <li>Stress at anxiety sa trabaho o personal na buhay na humahadlang sa espirituwal na paglago.</li>
+            <li>Paggamit ng media at balita upang palaging maipakita ang "panganib" sa mundo, nagiging dahilan ng takot.</li>
+        </ul>
+        <blockquote>
+            "Sapagka't hindi tayo binigyan ng Diyos ng espiritu ng takot, kundi ng kapangyarihan, pag-ibig, at ng pagpipigil sa sarili."
+            <strong>— 2 Timoteo 1:7</strong>
+        </blockquote>
+    </div>
+
+    <!-- SLIDE 11 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Ang Payo sa Lahat</h3><br><br><br><br>
+        <blockquote>
+            "Magsuot kayo ng buong baluti ng Diyos, upang kayo'y makalaban sa mga pakana ng diyablo."
+            <strong>— Efeso 6:11</strong>
+        </blockquote>
+        <p>Sa pamamagitan nito, malinaw na ang bawat maling aral o kasamaan na nakakaapekto sa tao ay isang taktika ni Satanas upang sirain ang kabanalan at pagkakaisa ng Iglesia.</p>
+    </div>
+
+    <!-- SLIDE 12 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Ang Lalong Dapat Pakaingatan sa Kabataan</h3><br><br><br><br>
+        <blockquote>
+            "[1] Datapuwa't alamin mo ito, na sa mga huling araw ay darating ang mga panahong mapanganib. [2] Sapagka't ang mga tao'y magiging maibigin sa kanilang sarili, maibigin sa salapi, mayayabang, mga mapagmalaki, mapagtungayaw, masuwayin sa mga magulang, mga walang turing, mga walang kabanalan, [3] Walang katutubong pagibig, mga walang paglulubag, mga palabintangin, mga walang pagpipigil sa sarili, mga mabangis, hindi mga maibigin sa mabuti, [4] Mga lilo, mga matitigas ang ulo, mga palalo, mga maibigin sa kalayawan kay sa mga maibigin sa Dios; [5] Na may anyo ng kabanalan, datapuwa't tinanggihan ang kapangyarihan nito: lumayo ka rin naman sa mga ito."
+            <strong>— 2 Timoteo 3:1-5</strong>
+        </blockquote>
+        <p>Ang epekto nito ay makikita sa mga kabataan na magiging mapagtungayaw, masuwayin, at walang paggalang sa awtoridad at sa mga pinuno at hari na magiging kasangkapan ni Satanas para sa masamang layunin (Apocalipsis 16:14). Ang lahat ng ito ay nagpapakita ng patuloy na espirituwal na labanan sa kasalukuyang panahon.</p>
+    </div>
+
+    <!-- SLIDE 13 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Ang Magiging Kalagayan ng Panahon Ngayon</h3><br><br><br><br>
+        <blockquote>
+            "Nguni't hayag na sinasabi ng Espiritu, na sa mga huling panahon ang iba'y magsisitalikod sa pananampalataya, at mangakikinig sa mga espiritung mapanghikayat at sa mga aral ng mga demonio."
+            <strong>— II Timoteo 4:1</strong>
+        </blockquote>
+        <p>Sinabi ni Pablo, batay sa Espiritu ng Diyos, na darating ang panahon kung saan marami sa mga mananampalataya ang magsisitalikod sa pananampalataya. Ang ibig sabihin nito ay hindi lahat ay mananatiling tapat sa katotohanan at sa aral ni Cristo; magkakaroon ng paglayo o pagtanggi sa Diyos dahil sa tukso, pagod sa paglilingkod, o impluwensya ng maling aral.</p>
+    </div>
+
+    <!-- SLIDE 14 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Mga Espiritung Mapanghikayat sa Modernong Konteksto</h3><br><br><br><br>
+            <li><strong>Maling aral o pseudo-spirituality:</strong> Mga guro o relihiyosong grupo na nagtuturo ng doktrinang hindi alinsunod sa salita ng Diyos.</li>
+            <li><strong>Cultural deception o influence:</strong> Mga impluwensya mula sa media, social media, o popular na kultura na nagtutulak sa tao na iwan ang Diyos o ituring na hindi mahalaga ang pananampalataya.</li>
+            <li><strong>False spirituality:</strong> Pagpapakita ng kabutihan o kabanalan sa labas ngunit may layuning linlangin ang tao, gaya ng mga "false prophets" o influencers na nagpapalaganap ng maling katuruan.</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 15 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Kalagayan ng Geo-Politics, Ekonomiya, at Tao</h3><br><br><br><br>
+        <ul>
+            <li><strong>Geo-Politics:</strong> Sa sitwasyon ng geo-politics, ayon sa <strong>Job 12:24-25</strong>, ang pang-unawa at pagkilala ng mga pinuno ay maaaring alisin at maging parang "lango," na nagpapahirap sa kanila na mamuno ng may karunungan. Ang sitwasyon ay magiging katulad ng isang mabigat na panganib na hindi madaling mapigilan (<strong>Amos 5:19</strong>).</li>
+            <br><li><strong>Ekonomiya:</strong> Sa panahong ito, ang kayamanan ay bulok at hindi makapagliligtas (<strong>Santiago 5:1-3</strong>; <strong>Apocalipsis 6:6</strong>).</li>
+           <br><li><strong>Pagkaligaw:</strong> Maraming tao ang maliligaw (<strong>Mateo 24:5</strong>). Kahit ang bilang ng Israel, na dati'y napakarami tulad ng buhangin sa dagat, ay mababawasan at marami ang magiging labi lamang (<strong>Roma 9:27</strong>).</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 16 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Ang Magiging Kalagayan ni Satanas sa Huli</h3><br><br><br><br>
+        <p>Sa huling bahagi ng panahon, ipinapakita ng Biblia na si Satanas ay magiging gaya ng mabangis na leon na naglalakad upang lamunin ang kanyang biktima.</p>
+        <blockquote>
+            "Kayo'y maging mapagpigil, kayo'y maging mapagpuyat; ang inyong kalaban na diablo, na gaya ng leong umuungal, ay gumagala na humahanap ng masisila niya."
+            <strong>— I Pedro 5:8</strong>
+        </blockquote>
+    </div>
+
+    <!-- SLIDE 17 -->
+    <div class="slide">
+        <h3 class="slide-title">Ang Kabayong Maputi at Ang Magdarayang Busog</h3>
+        <p>Kasunod nito, ang Biblia ay naglalarawan na sasakay si Satanas sa kabayong maputi at may tangan na busog, na simbolo ng pandaraya, panlilinlang, at digmaan sa espirituwal na mundo.</p>
+        <blockquote>
+            "At tumingin ako, at narito, ang isang kabayong maputi, at yaong nakasakay dito ay may isang busog; at binigyan siya ng isang putong: at siya'y yumaong nagtatagumpay, at upang magtagumpay."
+            <strong>— Apocalipsis 6:2</strong>
+        </blockquote>
+        <p>Ang simbolong ito ay nagpapahiwatig ng mabilis at tusong pagkalat ng kasamaan sa mundo, gamit ang panlilinlang at tukso bilang armas.</p>
+        <p>Bukod dito, ginagamit ni Satanas ang kasinungalingan at pandaraya upang akitin at iligaw ang mga tao.</p>
+        <blockquote>
+            "Kundi nagsitalikod, at nagsigawang may paglililo na gaya ng kanilang mga magulang: sila'y nagsilisyang parang magdarayang busog."
+            <strong>— Awit 78:57</strong>
+        </blockquote>
+        <blockquote>
+            "Sila'y nanganunumbalik, nguni't hindi sa kaniya na nasa kaitaasan: sila'y parang magdarayang busog: ang kanilang mga prinsipe ay mangabubuwal sa pamamagitan ng tabak dahil sa poot ng kanilang dila: ito ang magiging katuyaan sa kanila sa lupain ng Egipto."
+            <strong>— Oseas 7:16</strong>
+        </blockquote>
+        <p>Ipinapakita ng dalawang talata na ang tao ay madaling maligaw kung tatangkilik sa kasinungalingan, at ginagamit ito ni Satanas upang patuloy na iligaw ang sangkatauhan.</p>
+    </div>
+
+    <!-- SLIDE 18 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Ang Simbolo ng Mapanlinlang na Babae</h3><br><br><br><br>
+        <p>Isa sa mga kilalang pamamaraan ni Satanas ay ang paggamit ng babae o simbolong babae upang akitin at iligaw ang mga tao.</p>
+        <blockquote>
+            "[3] At ako'y kaniyang dinalang nasa Espiritu sa isang ilang: at nakita ko ang isang babae na nakasakay sa isang hayop na pula, na puno ng mga pangalang pamumusong, na may pitong ulo at sangpung sungay. [4] At nararamtan ang babae ng kulay-ube at ng pula, at nahihiyasan ng ginto at ng mga mahalagang bato at mga perlas, na sa kaniyang kamay ay may isang sarong ginto na puno ng mga kasuklamsuklam, at ng mga bagay na marurumi ng kaniyang pakikiapid, [5] At sa kaniyang noo ay nakasulat ang isang pangalan, HIWAGA, DAKILANG BABILONIA, INA NG MGA PATUTOT AT NG MGA KASUKLAMSUKLAM SA LUPA. [6] At nakita ko ang babae na lasing sa dugo ng mga banal, at sa dugo ng mga martir ni Jesus. At nang aking makita siya ay nanggilalas ako ng malaking panggigilalas."
+            <strong>— Apocalipsis 17:3-6</strong>
+        </blockquote>
+        <blockquote>
+            "At, narito, doo'y nasalubong niya ang isang babae na nakagayak ng tila isang patutot, at tuso sa puso."
+            <strong>— Kawikaan 7:10</strong>
+        </blockquote>
+        <p>Ito ay simbolo ng tukso at pandaraya ni Satanas upang palihimang linlangin ang tao at ilayo sa kabanalan.</p>
+    </div>
+
+    <!-- SLIDE 19 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Ang Banal na Babae (Ang Iglesia)</h3><br><br><br><br>
+        <p>Ngunit sa kabila ng lahat ng taktika ni Satanas, ang Diyos ay naghanda naman ng Kaniyang Iglesia bilang dalagang malinis at tapat (babae).</p>
+        <blockquote>
+            "Sapagka't ako'y naninibugho tungkol sa inyo ng panibughong ukol sa Dios: sapagka't kayo'y aking pinapagasawa sa isa, upang kayo'y maiharap ko kay Cristo na tulad sa dalagang malinis."
+            <strong>— II Corinto 11:2</strong>
+        </blockquote>
+        <blockquote>
+            "[30] Sapagka't tayo ay mga sangkap ng kaniyang katawan. [31] Dahil dito'y iiwan ng lalake ang kaniyang ama at ina, at makikisama sa kaniyang asawa; at ang dalawa ay magiging isang laman. [32] Ang hiwagang ito ay dakila: datapuwa't sinasalita ko ang tungkol kay Cristo at tungkol sa iglesia."
+            <strong>— Efeso 5:30-32</strong>
+        </blockquote>
+        <p>Ipinapakita rito na ang Iglesia ay inihanda ng Diyos para maging matibay at malinis, at nakalaan para kay Cristo bilang Kaniyang katawan.</p>
+    </div>
+
+    <!-- SLIDE 20 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Ang Katiyakan ng Tagumpay ng Iglesia</h3><br><br><br><br>
+        <p>Bilang katuparan ng hula:</p>
+        <blockquote>
+            "At aking itatatag siya para sa akin sa lupa; at ako'y magdadalang habag sa kaniya na hindi nagtamo ng kahabagan; at aking sasabihin sa kanila na hindi ko bayan, Ikaw ay aking bayan; at siya'y magsasabi, Ikaw ay aking Dios."
+            <strong>— Oseas 2:23</strong>
+        </blockquote>
+        <p>Itinayo ng Panginoong Hesus ang iglesia sa ibabaw ng matibay na pundasyon, ang bato na walang iba kundi ang Panginoong Hesus mismo:</p>
+        <blockquote>
+            "At sinasabi ko naman sa iyo, na ikaw ay Pedro, at sa ibabaw ng batong ito ay itatayo ko ang aking iglesia; at ang mga pintuan ng Hades ay hindi magsisipanaig laban sa kaniya."
+            <strong>— Mateo 16:18</strong>
+        </blockquote>
+        <p>Sa kabila ng katusuhan at panlilinlang ni Satanas, mananatiling ang iglesia ay matatag, ligtas at magtatagumpay sa lahat ng kaniyang kasamaan. Ang pintuan ng impiyerno na nakalaan para sa kaniya ay hindi mananaig dito.</p>
+    </div>
+
+
+    <!-- SLIDE 22 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Karagdagang Mahalagang Gabay (Editor's Note)</h3><br><br><br><br>
+        <p>Mahalaga ring maunawaan na ang pandaraya ni Satanas sa kasalukuyang panahon ay <strong>hindi laging nakikita</strong> sa anyong nakasanayan sa mga pelikula—mga madidilim na aklat, lantad na ritwal (blood-drinking), pag-aalay ng tao (human sacrifice), o nakatatakot na seremonyang madaling makilalang masama.</p>
+        <br><br><p>Kung ganoon lamang kabukas at kabangis ang kanyang paraan, maging ang taong walang pananampalataya o maging ang mga atheist ay maaaring mapaurong at mapasigaw ng <b>"Oh my God"</b>, kung makakita man sila ng mga ganyang ritwal bilang pandaraya ni Satanas.</p>
+       <br> <br><p><b>Ang lalong mapanganib</b> na pandaraya ay yaong dumarating sa anyo ng <strong>IDEOLOGY (lalo ang NEO-LIBERALISM)</strong>, karapatan (RIGHTS), kalayaan, kasiyahan, pag-ibig, pagtanggap, at pansariling katotohanan. Hindi ito agad nakakatakot sa paningin, sapagkat ito ay ipinapakita bilang makabago, makatao, at mapagpalaya.</p>
+    </div>
+
+    <!-- SLIDE 23 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Institutionalized Deception & Hyper-Individualism</h3><br><br><br><br>
+        <p>Sa ganitong paraan naiinstitutionalize, o nagiging bahagi ng pang-araw-araw na sistema, ang mga maling aral na salungat sa kalooban ng Dios. Ang kasamaan ay hindi na lamang itinutulak bilang kasalanan, kundi ipinapakilala bilang normal, katanggap-tanggap, at dapat pang ipagdiwang.</p>
+      <br><br>  <p>Sa pananaw ng pananampalatayang biblikal, kabilang dito ang pagpapahina sa banal na kaayusan ng Dios tungkol sa pamilya, kasal, pagkatao, at moralidad; gayundin ang paglaganap ng kaisipang ang sariling damdamin, sariling kagustuhan, at sariling kaligayahan ang pinakamataas na pamantayan ng buhay.</p>
+      <br><br>  <p>Ito ang diwa ng hyper-individualism: ang tao ang nagiging sentro, ang sariling puso ang nagiging gabay, at ang kalooban ng Dios ay itinuturing na sagabal sa personal na kalayaan. At tandaan natin, ang hyper-individualism o labis na pagpapahalaga sa sarili (puro tungkol sa "self" like self-love, self-preferred pronouns) ay pangunahing aral ng Church of Satan -- ang labis na pagmamahal sa sarili o kaya'y maging sentro ng buhay mo ang iyong sarili ay tutol sa aral ng Biblia sapagka't ang wika nga ng Panginoong Hesus:</p>
+        <blockquote>
+            "Kung ang sinomang tao'y ibig sumunod sa akin, ay tumanggi sa kaniyang sarili, at pasanin ang kaniyang krus, at sumunod sa akin."
+            <strong>— Mateo 16:24</strong>
+        </blockquote>
+    </div>
+
+    <!-- SLIDE 24 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Mapanlinlang na Slogans / Hashtags sa Popular Culture</h3><br><br><br><br>
+        <p>Dagdag pa rito, ang mga mapandaya at mapang akit na turo na kasangkapan ni Satanas ay makikita sa mga salitang paulit-ulit na ipinapalaganap sa popular na kultura at social media gamit ang mga ilang hashtag ##: "you deserve to be happy," "YOLO," "love is love," "just follow your heart," at "no one can judge me."</p>
+      <br><br>  <p>Sa unang tingin, ang mga ito ay tila payak, positibo, at walang panganib (harmless). Ngunit kapag ginawang pamalit sa salita ng Dios, ang mga ganitong kaisipan ay maaaring maging daan upang ang tao ay masanay na sukatin ang tama at mali ayon lamang sa kanyang damdamin.</p>
+      <br><br>  <p>Sa ganitong kalagayan, ang kasalanan ay nabibigyan ng bagong pangalan, ang pagsuway ay natatakpan ng salitang kalayaan, at ang pagtalikod sa Dios ay naipapakita bilang pagiging tapat sa sarili.</p>
+    </div>
+
+    <!-- SLIDE 25 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Pagsusuri sa "Love is Love"</h3><br><br><br><br>
+        <p>Halimbawa, sinasabi ng marami: "love is love." Sa unang pakinig, tila mahirap tutulan sapagkat ang pag-ibig ay isang mabuting bagay. Ngunit sa Biblia, ang pag-ibig ay hindi walang hangganang pahintulot sa anumang naisin ng tao.</p>
+        <br><br><p>Ang pag-ibig na mula sa Dios ay may banal na pamantayan (SACRED MORAL STANDARD); ito ay hindi humihiwalay sa katotohanan, kabanalan, pagpipigil sa sarili, at pagsunod sa kalooban ng Maylalang. Kaya hindi lahat ng tinatawag ng tao na "pag-ibig" ay agad na maituturing na pag-ibig na kinalulugdan ng Dios.</p>
+        <br><br><p>Kapag ang pag-ibig ay ginamit upang bigyang-matuwid ang pita, pagsuway, kalikuan, o paglabag sa kaayusang itinatag ng Dios, hindi na ito ang pag-ibig na itinuturo ng Biblia, kundi isang damdaming ginawang dahilan upang talikuran ang katotohanan.</p>
+        <br><br><p>Dito nagiging mapanganib ang salitang "love is love." Kung aalisin ang moral na pamantayan ng Dios, maaaring tawaging pag-ibig ang halos anumang uri ng pagnanasa, pagkahumaling, o relasyon, gaano man ito kalayo sa banal na kaayusan. Kaya nga tayo'y nakakarinig ng mga balitang isang lalake/babae ang nagpakasal sa kaniyang alagang hayop/bahay/ o anomang bagay dahil sa "pag-ibig".</p>
+    </div>
+
+    <!-- SLIDE 26 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Ang Puso ng Tao at ang mga Halimbawa ng Mundo</h3><br><br><br><br>
+        <p>Sa ganitong paraan, ang tao ay natututong isipin na sapat nang siya ay may nararamdaman upang maging tama ang kanyang ginagawa. Ngunit hindi ganito ang turo ng Biblia. Ang puso ng tao ay hindi dapat gawing pinakamataas na hukom ng moralidad, sapagkat ang puso, kapag hindi ginagabayan ng salita ng Dios, ay madaling madaya ng sariling pita at sariling katuwiran.</p>
+        <br><br><p>Makikita sa kasalukuyang panahon kung gaano kalayo ang maaaring marating ng ganitong pag-iisip. May mga pagkakataong ang tinatawag na "pag-ibig" ay hindi na lamang inilalapat sa relasyong ayon sa itinatag na kaayusan ng Dios, kundi maging sa mga uri ng ugnayang dati'y hindi itinuturing na normal o makatuwiran.</p>
+        <br><br><p>Sa Japan, halimbawa, nakilala si Akihiko Kondo dahil sa isang simbolikong pagpapakasal sa virtual character na si Hatsune Miku, sa pamamagitan ng isang hologram device. Nang tumigil ang suporta ng software na nagpapahintulot sa kanilang komunikasyon, hindi na niya nakausap ang tinatawag niyang asawa. Ang ganitong halimbawa ay nagpapakita kung paano, kapag ang pag-ibig ay inalis sa pamantayan ng katotohanan at ginawang purong damdamin lamang, maaaring lumabo ang hangganan sa pagitan ng tunay na relasyon, pagnanasa, pantasya, at pansariling kasiyahan.</p>
+    </div>
+
+    <!-- SLIDE 27 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Same-Sex Relationships & Ang Tugon ng Biblia sa "Love is Love"</h3><br><br><br><br>
+        <p>Gayundin, sa usapin ng same-sex relationship at same-sex marriage, ang paninindigang biblikal ay hindi nakabatay sa damdamin ng tao, kundi sa pagkilala na ang Dios ang nagtakda ng banal na kaayusan ng kasal, pamilya, at seksuwalidad. Maaaring may taong magsabi na ang kanilang nararamdaman ay tunay na pag-ibig; ngunit sa pananaw ng Biblia, ang sukatan ng tama ay hindi lamang ang tindi ng damdamin, kundi kung ito ba ay nakaayon sa kalooban ng Dios. Kaya ang hamon sa mananampalataya ay hindi basta tanggapin ang anumang ipinapahayag ng mundo bilang pag-ibig, kundi suriin ito ayon sa salita ng Dios.</p>
+       <br><br> <p>Sa ganitong punto, makikita na ang pandaraya ni Satanas ay hindi palaging nasa anyo ng lantad na kasamaan. Madalas, ito ay nasa anyo ng magagandang salita: pag-ibig, kalayaan, pagtanggap, kaligayahan, at pagiging totoo sa sarili. Ngunit kapag ang mga salitang ito ay ginamit upang palitan ang pamantayan ng Dios, ang tao ay unti-unting nasasanay na mamuhay na para bang ang pakikipagrelasyon ay gaya lamang ng pagpapalit ng damit: ngayon ay ibig ang isang kulay, bukas ay iba na naman; ngayon ay ito ang gusto, kinabukasan ay hahanap ng panibago. Sa ganitong kalagayan, ang pag-ibig ay hindi na banal na pananagutan sa harap ng Dios, kundi pansamantalang damdaming sumusunod sa bugso ng puso.</p>
+       <br><br> <p>Kaya ang tugon ng Biblia sa "love is love" ay hindi pagtanggi na mahalaga ang pag-ibig, kundi paglilinaw na ang tunay na pag-ibig ay may katotohanan, may hangganan, may kabanalan, at may pananagutan sa Dios. Ang pag-ibig na mula sa Dios ay hindi nagtutulak sa tao palayo sa Kanya; sa halip, inaakay nito ang tao tungo sa pagsunod, kalinisan, at katapatan sa banal na kalooban ng Maylalang.</p>
+    </div>
+
+    <!-- SLIDE 28 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Pagsusuri sa "You Deserve to Be Happy"</h3><br><br><br><br>
+        <p>Gayundin ang kaisipang "you deserve to be happy." Sa unang tingin, tila mabuti at makatao ang panawagang ito. Sino nga naman ang ayaw maging masaya? Ngunit sa pananaw ng Biblia, hindi ang kaligayahan ng tao ang pinakamataas na layunin ng buhay, kundi ang pagtalima sa Dios.</p>
+        <p>Ang tunay na kagalakan ay hindi bunga ng pagsunod sa anumang naisin ng laman, kundi ng pamumuhay ayon sa katuwiran at kabanalan. Kaya kapag ang "you deserve to be happy" ay ginamit upang bigyang-katwiran ang kasalanan, pagtalikod sa tungkulin, pagwasak sa pamilya, paglabag sa tipan, o pagsuway sa utos ng Dios, hindi na ito simpleng paghahangad ng kaligayahan. Ito ay nagiging paraan upang ang tao ay maturuang isipin na ang sariling kasiyahan ay mas mahalaga kaysa katapatan sa Maylalang.</p>
+        <p>Sa Biblia, may mga bagay na maaaring magbigay ng panandaliang ligaya ngunit humahantong sa kapahamakan.</p>
+        <blockquote>
+            "May daan na tila matuwid sa tao, nguni't ang dulo niyaon ay mga daan ng kamatayan."
+            <strong>— Kawikaan 14:12</strong>
+        </blockquote>
+        <p>Ibig sabihin, hindi lahat ng nagpapasaya sa tao ay tama, at hindi lahat ng tila nagbibigay ng kalayaan ay tunay na nagliligtas. May kaligayahang galing sa Dios, ngunit mayroon ding kaligayahang bunga lamang ng pita, kapalaluan, at pansariling kagustuhan. Kaya ang tanong ng mananampalataya ay hindi lamang, "Masaya ba ako?" kundi, "Kalugod-lugod ba ito sa Dios?"</p>
+    </div>
+
+    <!-- SLIDE 29 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Pagsusuri sa "YOLO" (You Only Live Once)</h3><br><br><br><br>
+        <p>Kaugnay nito ang isa pang tanyag na panawagan: "YOLO," o "you only live once." Ginagamit ito ng marami upang sabihing minsan lang mabuhay ang tao, kaya dapat niyang gawin ang lahat ng nais niyang gawin. Ngunit sa Biblia, ang katotohanang minsan lamang mabuhay ang tao ay hindi dahilan upang magpakasasa sa laman, kundi dahilan upang maging maingat, banal, at handa sa pagharap sa Dios.</p>
+        <blockquote>
+            "Itinakda sa mga tao ang mamatay na minsan, at pagkatapos nito ay ang paghuhukom."
+            <strong>— Hebreo 9:27</strong>
+        </blockquote>
+        <p>Kaya ang "minsan lang mabuhay" ay hindi pahintulot sa walang habas na pamumuhay; ito ay paalala na ang buhay ay maikli, may pananagutan, at haharap sa paghuhukom ng Dios.</p>
+        <p>Kung ang mundo ay nagsasabing, "YOLO, kaya gawin mo ang gusto mo," ang Biblia naman ay nagsasabing, "Minsan ka lamang mabubuhay, kaya mamuhay ka nang may takot sa Dios." Ang ikli ng buhay ay hindi dapat magtulak sa tao sa kalayawan, kundi sa karunungan.</p>
+        <blockquote>
+            "Turuan mo nga kami na bilangin ang aming mga kaarawan, upang kami ay mangagtamo ng pusong may karunungan."
+            <strong>— Awit 90:12</strong>
+        </blockquote>
+        <p>Samakatuwid, ang tamang tugon sa kaiklian ng buhay ay hindi padalus-dalos na pagsunod sa pita, kundi maingat na pamumuhay sa harap ng Dios.</p>
+    </div>
+
+    <!-- SLIDE 30 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Pagsusuri sa "Just Follow Your Heart"</h3><br><br><br><br>
+        <p>Dito rin pumapasok ang isa pang mapanlinlang na aral: "just follow your heart." Sa popular na kultura, ito ay ipinakikitang parang pinakamataas na anyo ng katapatan sa sarili. Ngunit malinaw ang babala ng Biblia tungkol sa puso ng tao.</p>
+        <blockquote>
+            "Ang puso ay magdaraya ng higit kay sa lahat na bagay, at totoong masama: sinong makaaalam?"
+            <strong>— Jeremias 17:9</strong>
+        </blockquote>
+        <p>Kaya hindi maaaring gawing sukatan ng katotohanan ang sariling puso, sapagkat ang puso, kapag hindi nasasakop ng salita ng Dios, ay madaling madala ng pagnanasa, galit, takot, inggit, kapalaluan, at maling katuwiran.</p>
+        <p>Hindi sinasabi ng Biblia na walang halaga ang damdamin ng tao. Ngunit itinuturo nito na ang damdamin ay dapat mapasakop sa katotohanan ng Dios. Ang puso ay hindi dapat maging hari; ang Dios ang dapat maghari sa puso. Kapag ang tao ay basta sumusunod sa kanyang nararamdaman, maaari niyang mapagkamalang pag-ibig ang pita, mapagkamalang kalayaan ang pagsuway, at mapagkamalang kaligayahan ang daang patungo sa kapahamakan. Kaya ang mananampalataya ay hindi tinatawag na sundin lamang ang puso, kundi suriin ang puso sa liwanag ng salita ng Dios.</p>
+    </div>
+
+    <!-- SLIDE 31 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Ang Panganib ng mga Makabagong Aral</h3><br><br><br><br>
+        <p>Sa ganitong paraan, ang mga salitang "you deserve to be happy," "YOLO," at "follow your heart" ay nagiging mapanganib kapag inihiwalay sa Dios. Hindi sila agad nakakatakot pakinggan; sa katunayan, sila ay maganda, maikli, madaling tandaan, at kaakit-akit sa makabagong tao.</p>
+       <br><br> <p>Ngunit sa likod ng mga ito ay maaaring maitanim ang isang aral na lubhang salungat sa Biblia: na ang tao ang sentro ng buhay, ang kaligayahan ang pinakamataas na layunin, ang sandali ang pinakamahalaga, at ang puso ang huling hukom ng tama at mali.</p>
+       <br><br> <p>Ito ang uri ng pandarayang hindi kailangang magmukhang madilim o nakatatakot. Hindi kailangan ni Satanas na magpakita sa anyo ng halimaw kung kaya niyang kumbinsihin ang tao na ang pagsuway ay self-love, ang kalayawan ay freedom, ang pita ay happiness, at ang panlilinlang ng puso ay authenticity.</p>
+       <br><br> <p>Kaya ang tunay na bantay ng mananampalataya ay hindi lamang laban sa hayagang kasamaan, kundi laban din sa magagandang salitang unti-unting nagpapalit sa pamantayan ng Dios.</p>
+    </div>
+
+    <!-- SLIDE 32 -->
+    <div class="slide"><br><br>
+        <h3 class="slide-title">Pangwakas na Pagninilay sa Pandaraya ni Satanas</h3><br><br><br><br>
+        <p>Dito makikita ang lalim ng pandaraya ni Satanas. Hindi niya kailangang magpakita sa anyong nakatatakot upang iligaw ang marami. Sapat na sa kanya na baguhin ang wika ng kasalanan, palitan ang kahulugan ng kalayaan, at gawing katanggap-tanggap ang mga bagay na dati'y kinikilalang labag sa kabanalan.</p>
+      <br><br>  <p>Kapag ang tao ay naniwalang ang pinakamataas na batas ay ang kanyang sariling puso, unti-unti siyang nailalayo sa Dios, sapagkat ang puso ng tao, kung hindi pasasakop sa katotohanan, ay madaling madaya ng pita, kapalaluan, at sariling katuwiran.</p>
+        <br><br><p>Sa ganitong pag-unawa, makikita na ang kasamaan ni Satanas ay hindi bunga ng paglalang ng Dios, kundi bunga ng kanyang sariling pagsuway at pagtalikod sa banal na kalooban ng Maylalang. Kaya ang pagkilala sa kanya ay hindi isang bagay na dapat pagtuunan upang siya ay dakilain, kundi isang mahalagang bahagi ng pag-iingat ng pananampalataya.</p>
+       <br><br> <p>Sa pamamagitan nito, ang mga mananampalataya ay natututong kumilala hindi lamang sa lantad na kasamaan, kundi maging sa mga panlilinlang na nakabalot sa kaakit-akit na salita, makabagong pananaw, at kulturang wari'y mabuti ngunit naglalayo sa tao sa Dios.</p>
+    </div>
+
+    <!-- SLIDE : THANK YOU SLIDE -->
+    <div class="slide thank-you-slide">
+        <div class="badge">Pagpapala at Kapayapaan sa Lahat</div>
+        <h1>MARAMING SALAMAT PO!</h1>
+        <h2>"Magpakatibay kayo sa Panginoon at sa kapangyarihan ng kaniyang kalakasan." — Efeso 6:10</h2>
+        <p class="org">QUESTIONS?</p>
+    </div>
+
+    <!-- SLIDE 33: QUIZ QUESTION 1 (BLANK) -->
+    <div class="slide"><br><br><br><br>
+        <h3 class="slide-title">Bible Quiz Area — Tanong 1 - 3 / 10</h3><br><br><br><br>
+        <div class="quiz-container">
+            <div class="quiz-placeholder">
+                <p>Magbigay ng 3 sa mga ginagawa ni Satanas sa panahong ito.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- SLIDE 36: QUIZ QUESTION 4 (BLANK) -->
+    <div class="slide"><br><br><br><br>
+        <h3 class="slide-title">Bible Quiz Area — Tanong 4 / 10</h3><br><br><br><br>
+        <div class="quiz-container">
+            <div class="quiz-placeholder">
+                <p>sa Efeso 6:11, “Magsuot kayo ng buong ______ ng Diyos, upang kayo’y makalaban
+sa mga pakana ng diyablo.”</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 37: QUIZ QUESTION 5 (BLANK) -->
+    <div class="slide"><br><br><br><br>
+        <h3 class="slide-title">Bible Quiz Area — Tanong 5 / 10</h3><br><br><br><br>
+        <div class="quiz-container">
+            <div class="quiz-placeholder">
+                <p>Sa anong hayop inilarawan si Satanas sa I Pedro 5:8</p>
+        </div>
+            </div>
+    </div>
+
+    <!-- SLIDE 38: QUIZ QUESTION 6 (BLANK) -->
+    <div class="slide"><br><br><br><br>
+        <h3 class="slide-title">Bible Quiz Area — Tanong 6 / 10</h3><br><br><br><br>
+        <div class="quiz-container">
+            <div class="quiz-placeholder">
+                <p>Sa Apocalipsis 17:3-6, Ano ang paraang ginamit ni Satanas para akitin at iligaw ang tao?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 39: QUIZ QUESTION 7 (BLANK) -->
+    <div class="slide"><br><br><br><br>
+        <h3 class="slide-title">Bible Quiz Area — Tanong 7 - 8 / 10</h3><br><br><br><br>
+        <div class="quiz-container">
+            <div class="quiz-placeholder">
+                <p>Magbigay ng dalawang hashtags (#) na madalas gamitin ng tao.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 41: QUIZ QUESTION 9 (BLANK) -->
+    <div class="slide"><br><br><br><br>
+        <h3 class="slide-title">Bible Quiz Area — Tanong 9 / 10</h3><br><br><br><br>
+        <div class="quiz-container">
+            <div class="quiz-placeholder">
+                <p>Ano ang sub-title ng ika-9 na bahagi?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 42: QUIZ QUESTION 10 (BLANK) -->
+    <div class="slide"><br><br><br><br>
+        <h3 class="slide-title">Bible Quiz Area — Tanong 10 / 10</h3><br><br><br><br>
+        <div class="quiz-container">
+            <div class="quiz-placeholder">
+                <p>“Upang tayo’y huwag na
+maging mga bata, na dala-dala ng bawat hangin ng aral sa pamamagitan ng pandaraya ng tao
+sa pamamagitan ng kanilang tuso-tusong balak.”</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 43: ANSWERS -->
+    <div class="slide"><br><br><br><br>
+        <h3 class="slide-title">Bible Quiz Area — Mga Sagot</h3><br><br><br><br>
+        <div class="quiz-container">
+            <div class="quiz-placeholder">
+                <p><strong>
+                    1 - 3. Pagpapalaganap ng Maling Aral o Doktrina, Pinalitan ang Kabanalan ng Kalikuan, Ang mga Huwad na Kabutihan,
+                        Sirain ang Pagkakaisa, Pagpapalakas ng materialismo at kasakiman, Paglulubog ng isip at damdamin sa takot at pag-aalala <br>
+                  <br>  4. Baluti<br>
+                   <br> 5. Leon<br>
+                   <br> 6. Paglulubog ng isip at damdamin sa takot at pag-aalala<br>
+                  <br>  7 - 8. hashtag #: “you deserve to be happy,” “YOLO,” “love is love,” “just follow your heart,” at “no one can
+                            judge me.”<br>
+                   <br> 9. ANG KASALUKUYANG PANAHON NA GAGAWIN NI SATANAS<br>
+                   <br> 10. Efeso 4:14
+                    </strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="controls">
+        <button class="btn" id="prevBtn" onclick="changeSlide(-1)" disabled>Previous</button>
+        <span class="slide-counter" id="slideCounter">Slide 1 / 43</span>
+        <button class="btn" id="nextBtn" onclick="changeSlide(1)">Next</button>
+    </div>
+
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const slideCounter = document.getElementById('slideCounter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateSlide() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            }
+        });
+
+        slideCounter.textContent = `Slide ${currentSlide + 1} / ${slides.length}`;
+        
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === slides.length - 1;
+    }
+
+    function changeSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+        updateSlide();
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'Space') {
+            if (currentSlide < slides.length - 1) changeSlide(1);
+        } else if (e.key === 'ArrowLeft') {
+            if (currentSlide > 0) changeSlide(-1);
+        }
+    });
+</script>
+
+</body>
+</html>
